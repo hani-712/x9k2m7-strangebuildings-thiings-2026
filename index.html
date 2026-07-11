@@ -1,18 +1,50 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>well</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Summer</title>
+<style>
+html,body{margin:0;height:100%;font-family:Georgia,serif;overflow:hidden;background:linear-gradient(#ffd9a8,#ffb88c 45%,#7ec8e3 46%,#4da6c8);}
+body{display:flex;align-items:center;justify-content:center}
+#overlay{position:absolute;inset:0;background:rgba(255,255,255,.08);backdrop-filter:blur(4px);}
+.card{position:relative;z-index:2;max-width:700px;width:90%;padding:40px;border-radius:24px;background:rgba(255,255,255,.18);backdrop-filter:blur(12px);text-align:center;color:white;box-shadow:0 8px 30px rgba(0,0,0,.25)}
+h1{font-weight:normal}
+button{padding:12px 28px;border:none;border-radius:999px;font-size:18px;cursor:pointer}
+.line{opacity:0;transition:opacity 2s;font-size:1.3rem;margin:18px 0}
+.show{opacity:1}
+.wave{position:absolute;bottom:0;width:200%;height:140px;background:rgba(255,255,255,.35);border-radius:45%;animation:wave 10s linear infinite}
+@keyframes wave{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+</style>
 </head>
 <body>
-    <h1>Someone told me this:</h1>
+<div id="overlay"></div>
+<div class="wave"></div>
+<div class="card">
+<h1>Summer</h1>
+<p>Some things are understood, not explained.</p>
+<button id="begin">Begin</button>
 
-    <p>I hope when the right one comes, he won't give up on me.</p>
+<div id="poem" style="display:none">
+<p class="line">I hope when the right one comes, he won't give up on me.</p>
+<p class="line">Not when I push him away.</p>
+<p class="line">Not when I tell him no.</p>
+<p class="line">Not when I am too confident.</p>
+<p class="line">Not when my pride gets in the way.</p>
+<p class="line"><strong>He will understand me.</strong></p>
+</div>
 
-    <p>Not when I push him away.</p>
-    <p>Not when I tell him no.</p>
-    <p>Not when I am too confident.</p>
-    <p>Not when my pride gets in the way.</p>
+<audio id="music" src="music.mp3"></audio>
+</div>
 
-    <p>He will understand me.</p>
+<script>
+document.getElementById("begin").onclick=()=>{
+ document.getElementById("music").play().catch(()=>{});
+ document.getElementById("begin").style.display="none";
+ document.getElementById("poem").style.display="block";
+ const lines=document.querySelectorAll(".line");
+ lines.forEach((l,i)=>setTimeout(()=>l.classList.add("show"),i*3500));
+};
+</script>
 </body>
 </html>
